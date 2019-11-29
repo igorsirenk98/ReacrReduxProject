@@ -1,0 +1,44 @@
+{
+    "bicycles": [
+        {
+            "title": "Ford",
+            "id": "1"
+        },
+        {
+            "title": "Dawg",
+            "id": "2"
+        },
+        {
+            "title": "Lolo",
+            "id": "3"
+        },
+        {
+            "title": "Lala",
+            "id": "4"
+        },
+        {
+            "title": "Joker",
+            "id": "5"
+        },
+        {
+            "title": "Smth",
+            "id": "6"
+        },
+        {
+            "title": "Bobo",
+            "id": "7"
+        },
+        {
+            "title": "Hihi",
+            "id": "8"
+        },
+        {
+            "title": "Unreal",
+            "id": "9"
+        },
+        {
+            "title": "Poncho",
+            "id": "10"
+        }
+    ]
+}
