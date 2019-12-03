@@ -1,22 +1,22 @@
 const sequelize = require('../sequelize');
 const DataTypes = require('../types/DataTypes');
 
-const ProductPhoto = sequelize.define('ProductPhoto', {
+const ProductDescription = sequelize.define('ProductDescription', {
     id: {
-        field: 'ProductPhotoID',
+        field: 'ProductDescriptionID',
         type: DataTypes.INTEGER,
         primaryKey: true
     },
-    ThumbnailPhotoFileName: {
-        field: 'ThumbnailPhotoFileName',
+    productDescription: {
+        field: 'Description',
         type: DataTypes.STRING
     }
 },
     {
         timestamps: false,
-        tableName: 'ProductPhoto',
+        tableName: 'ProductDescription',
         schema: 'Production'
     }
 );
 
-module.exports = ProductPhoto;
+module.exports = ProductDescription;

@@ -1,6 +1,4 @@
-const db = require('../express/models');
 const apiProduct = require('../express/routes/product');
-const apiProductPhoto = require('../express/routes/productPhoto');
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -19,8 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-apiProduct(app, db);
-apiProductPhoto(app, db);
+app.use('/top-products', apiProduct);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

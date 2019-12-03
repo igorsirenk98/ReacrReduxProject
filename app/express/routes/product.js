@@ -1,23 +1,16 @@
-module.exports = (app, db) => {
-  app.get('/', (req, res) => {
-    db.Product.belongsTo(db.ProductSubcategory, {
-      as: 'ProductInfo', foreignKey: 'ProductSubcategoryID'
-    });
-    db.ProductSubcategory.hasMany(db.Product, { foreignKey: 'ProductSubcategoryID' });
-    db.Product.findAll({
-      attributes: ['Name', 'ProductNumber', 'Color'],
-      include: [{
-        model: db.ProductSubcategory, as: 'ProductInfo',
-        where: {
-          ProductCategoryID: 1
-        }
-      }]
-    })
-      .then(result => res.json(result))
-  });
+const express = require('express');
+const router = express.Router();
+const Product = require('../models/product');
+const ProductActions = require('../actions/productActions');
 
-  app.get('/product/:id', (req, res) => {
-    db.Product.findByPk(req.params.id)
-      .then(result => res.json(result))
-  });
-}
+router.get('/', (req, res) => {
+	ProductActions.getTopProducts(Product)
+		.then(result => res.json(result))
+});
+
+// router.get('/:id', (req, res) => {
+// 	db.Product.findByPk(req.params.id)
+// 		.then(result => res.json(result))
+// });
+
+module.exports = router;
