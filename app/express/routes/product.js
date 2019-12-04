@@ -1,10 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const Product = require('../models/product');
-const ProductActions = require('../actions/productActions');
+const product = require('../models/basicModels/product');
+const productSearch = require('../models/productSearch');
+const transactionHistory = require('../models/basicModels/transactionHistory');
 
 router.get('/', (req, res) => {
-	ProductActions.getTopProducts(Product)
+	productSearch.getBikes(product)
+		.then(result => res.json(result))
+});
+
+router.get('/top-products', (req, res) => {
+	productSearch.getTopProducts(product)
 		.then(result => res.json(result))
 });
 

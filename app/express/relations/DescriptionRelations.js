@@ -1,9 +1,9 @@
-const Product = require('../models/product');
-const ProductDescription = require('../models/productDescription');
-const ProductDescriptionCulture = require('../models/productDescriptionCulture');
+const product = require('../models/basicModels/product');
+const productDescription = require('../models/basicModels/productDescription');
+const productDescriptionCulture = require('../models/basicModels/productDescriptionCulture');
 
-ProductDescriptionCulture.hasMany(Product, { foreignKey: 'ProductModelID' });
-Product.belongsTo(ProductDescriptionCulture, { foreignKey: 'ProductModelID' });
+productDescriptionCulture.hasMany(product, { foreignKey: 'ProductModelID' });
+product.belongsTo(productDescriptionCulture, { foreignKey: 'ProductModelID' });
 
-ProductDescription.hasMany(ProductDescriptionCulture, { foreignKey: 'ProductDescriptionID' });
-ProductDescriptionCulture.belongsTo(ProductDescription, { foreignKey: 'ProductDescriptionID' });
+productDescription.hasMany(productDescriptionCulture, { foreignKey: 'ProductDescriptionID' });
+productDescriptionCulture.belongsTo(productDescription, { foreignKey: 'ProductDescriptionID' });

@@ -1,10 +1,10 @@
-const Product = require('../models/product');
-const ProductSubcategory = require('../models/productSubcategory');
-const ProductDescription = require('../models/productDescription');
-const TransactionHistory = require('../models/transactionHistory');
+const product = require('../models/basicModels/product');
+const productSubcategory = require('../models/basicModels/productSubcategory');
+const productDescription = require('../models/basicModels/productDescription');
+const transactionHistory = require('../models/basicModels/transactionHistory');
 
-Product.belongsTo(ProductSubcategory, { foreignKey: 'ProductSubcategoryID' });
-ProductSubcategory.hasMany(Product, { foreignKey: 'ProductSubcategoryID' });
+product.belongsTo(productSubcategory, { foreignKey: 'ProductSubcategoryID' });
+productSubcategory.hasMany(product, { foreignKey: 'ProductSubcategoryID' });
 
-Product.hasMany(TransactionHistory, { foreignKey: 'ProductID' });
-TransactionHistory.belongsTo(Product, { foreignKey: 'ProductID' });
+product.hasMany(transactionHistory, { foreignKey: 'ProductID' })
+transactionHistory.belongsTo(product, { foreignKey: 'ProductID' });

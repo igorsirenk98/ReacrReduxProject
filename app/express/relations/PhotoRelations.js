@@ -1,9 +1,9 @@
-const Product = require('../models/product');
-const ProductProductPhoto = require('../models/productProductPhoto');
-const ProductPhoto = require('../models/productPhoto');
+const product = require('../models/basicModels/product');
+const productProductPhoto = require('../models/basicModels/productProductPhoto');
+const productPhoto = require('../models/basicModels/productPhoto');
 
-Product.hasMany(ProductProductPhoto, { foreignKey: 'ProductID' });
-ProductProductPhoto.belongsTo(Product, { foreignKey: 'ProductID' });
+product.hasOne(productProductPhoto, { foreignKey: 'ProductID' });
+productProductPhoto.belongsTo(product, { foreignKey: 'ProductID' });
 
-ProductProductPhoto.hasMany(ProductPhoto, { foreignKey: 'ProductPhotoID' });
-ProductPhoto.belongsTo(ProductProductPhoto, { foreignKey: 'ProductPhotoID' });
+productProductPhoto.hasOne(productPhoto, { foreignKey: 'ProductPhotoID' });
+productPhoto.belongsTo(productProductPhoto, { foreignKey: 'ProductPhotoID' });
