@@ -1,19 +1,20 @@
+const Sequelize = require('sequelize');
 const sequelize = require('../../sequelize');
-const dataTypes = require('../../types/dataTypes');
+const { DataTypes } = Sequelize;
 
-const productSubcategory = sequelize.define('ProductSubcategory', {
+const ProductSubcategory = sequelize.define('productSubcategory', {
     productCategoryID: {
         field: 'ProductCategoryID',
-        type: dataTypes.INTEGER
+        type: DataTypes.INTEGER
     },
     productSubcategoryID: {
         field: 'ProductSubcategoryID',
-        type: dataTypes.INTEGER,
+        type: DataTypes.INTEGER,
         primaryKey: true
     },
     productSubcategoryName: {
         field: 'Name',
-        type: dataTypes.STRING
+        type: DataTypes.STRING
     }
 }, {
     timestamps: false,
@@ -21,4 +22,10 @@ const productSubcategory = sequelize.define('ProductSubcategory', {
     schema: 'Production'
 });
 
-module.exports = productSubcategory;
+ProductSubcategory.associations = models => {
+    ProductSubcategory.hasMany(models.product, {
+        foreignKey: 'ProductSubcategoryID'
+    });
+}
+
+module.exports = ProductSubcategory;

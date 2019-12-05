@@ -1,23 +1,24 @@
+const Sequelize = require('sequelize');
 const sequelize = require('../../sequelize');
-const dataTypes = require('../../types/dataTypes');
+const { DataTypes } = Sequelize;
 
-const product = sequelize.define('Product', {
+const Product = sequelize.define('product', {
     id: {
         field: 'ProductID',
-        type: dataTypes.INTEGER,
+        type: DataTypes.INTEGER,
         primaryKey: true
     },
     productName: {
         field: 'Name',
-        type: dataTypes.STRING
+        type: DataTypes.STRING
     },
     productNumber: {
         field: 'ProductNumber',
-        type: dataTypes.STRING
+        type: DataTypes.STRING
     },
     price: {
         field: 'ListPrice',
-        type: dataTypes.FLOAT
+        type: DataTypes.FLOAT
     }
 }, {
     timestamps: false,
@@ -25,4 +26,22 @@ const product = sequelize.define('Product', {
     schema: 'Production'
 });
 
-module.exports = product;
+Product.associate = models => {
+    Product.hasMany(models.transactionHistory, {
+        foreignKey: 'ProductID'
+    });
+
+    Product.belongsTo(models.productSubcategory, {
+        foreignKey: 'ProductSubcategoryID'
+    });
+
+    Product.belongsTo(models.productDescriptionCulture, {
+        foreignKey: 'ProductModelID'
+    });
+
+    Product.hasOne(models.productProductPhoto, {
+        foreignKey: 'ProductID'
+    });
+}
+
+module.exports = Product;

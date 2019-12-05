@@ -1,15 +1,16 @@
+const Sequelize = require('sequelize');
 const sequelize = require('../../sequelize');
-const dataTypes = require('../../types/dataTypes');
+const { DataTypes } = Sequelize;
 
-const productPhoto = sequelize.define('ProductPhoto', {
+const ProductPhoto = sequelize.define('productPhoto', {
     id: {
         field: 'ProductPhotoID',
-        type: dataTypes.INTEGER,
+        type: DataTypes.INTEGER,
         primaryKey: true
     },
     ThumbnailPhotoFileName: {
         field: 'ThumbnailPhotoFileName',
-        type: dataTypes.STRING
+        type: DataTypes.STRING
     }
 }, {
     timestamps: false,
@@ -17,4 +18,10 @@ const productPhoto = sequelize.define('ProductPhoto', {
     schema: 'Production'
 });
 
-module.exports = productPhoto;
+ProductPhoto.associate = models => {
+    ProductPhoto.belongsTo(models.productProductPhoto, {
+        foreignKey: 'ProductPhotoID'
+    });
+}
+
+module.exports = ProductPhoto;

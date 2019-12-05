@@ -1,19 +1,20 @@
+const Sequelize = require('sequelize');
 const sequelize = require('../../sequelize');
-const dataTypes = require('../../types/dataTypes');
+const { DataTypes } = Sequelize;
 
-const transactionHistory = sequelize.define('TransactionHistory', {
+const TransactionHistory = sequelize.define('transactionHistory', {
     transactionID: {
         field: 'TransactionID',
-        type: dataTypes.INTEGER,
+        type: DataTypes.INTEGER,
         primaryKey: true
     },
     productID: {
         field: 'ProductID',
-        type: dataTypes.INTEGER
+        type: DataTypes.INTEGER
     },
     quantity: {
         field: 'Quantity',
-        type: dataTypes.INTEGER
+        type: DataTypes.INTEGER
     }
 }, {
     timestamps: false,
@@ -21,4 +22,10 @@ const transactionHistory = sequelize.define('TransactionHistory', {
     schema: 'Production'
 });
 
-module.exports = transactionHistory;
+TransactionHistory.associations = models => {
+    TransactionHistory.belongsTo(models.product, {
+        foreignKey: 'ProductID'
+    });
+}
+
+module.exports = TransactionHistory;

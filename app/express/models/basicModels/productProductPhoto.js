@@ -1,10 +1,11 @@
+const Sequelize = require('sequelize');
 const sequelize = require('../../sequelize');
-const dataTypes = require('../../types/dataTypes');
+const { DataTypes } = Sequelize;
 
-const productProductPhoto = sequelize.define('ProductProductPhoto', {
+const ProductProductPhoto = sequelize.define('productProductPhoto', {
     id: {
         field: 'ProductPhotoID',
-        type: dataTypes.INTEGER,
+        type: DataTypes.INTEGER,
         primaryKey: true
     }
 }, {
@@ -13,4 +14,14 @@ const productProductPhoto = sequelize.define('ProductProductPhoto', {
     schema: 'Production'
 });
 
-module.exports = productProductPhoto;
+ProductProductPhoto.associate = models => {
+    ProductProductPhoto.belongsTo(models.product, {
+        foreignKey: 'ProductID'
+    });
+
+    ProductProductPhoto.hasOne(models.productPhoto, {
+        foreignKey: 'ProductPhotoID'
+    });
+}
+
+module.exports = ProductProductPhoto;

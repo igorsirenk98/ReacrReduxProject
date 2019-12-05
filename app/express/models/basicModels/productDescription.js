@@ -1,15 +1,16 @@
+const Sequelize = require('sequelize');
 const sequelize = require('../../sequelize');
-const dataTypes = require('../../types/dataTypes');
+const { DataTypes } = Sequelize;
 
-const productDescription = sequelize.define('ProductDescription', {
+const ProductDescription = sequelize.define('productDescription', {
     id: {
         field: 'ProductDescriptionID',
-        type: dataTypes.INTEGER,
+        type: DataTypes.INTEGER,
         primaryKey: true
     },
     productDescription: {
         field: 'Description',
-        type: dataTypes.STRING
+        type: DataTypes.STRING
     }
 }, {
     timestamps: false,
@@ -17,4 +18,10 @@ const productDescription = sequelize.define('ProductDescription', {
     schema: 'Production'
 });
 
-module.exports = productDescription;
+ProductDescription.associate = models => {
+    ProductDescription.hasMany(models.productDescriptionCulture, {
+        foreignKey: 'ProductDescriptionID'
+    });
+}
+
+module.exports = ProductDescription;

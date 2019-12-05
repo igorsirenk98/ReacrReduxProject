@@ -1,82 +1,73 @@
-const product = require('./basicModels/product');
-const productSubcategory = require('./basicModels/productSubcategory');
-const transactionHistory = require('./basicModels/transactionHistory');
-const productProductPhoto = require('./basicModels/productProductPhoto');
-const productPhoto = require('./basicModels/productPhoto');
-const productDescriptionCulture = require('./basicModels/productDescriptionCulture');
-const productDescription = require('./basicModels/productDescription');
-const productRelations = require('../relations/productRelations');
-const photoRelations = require('../relations/photoRelations');
-const descriptionRelations = require('../relations/descriptionRelations');
 const Sequelize = require('sequelize');
 const sequelize = require('../sequelize');
 const Op = Sequelize.Op;
 
 const productSearch = {
-    getBikes(model) {
-        return model.findAll({
+    getBikes(db) {
+        return db.product.findAll({
             attributes: ['Name', 'ProductNumber', 'Color', 'ListPrice'],
             include: [{
-                    model: productSubcategory,
+                    model: db.productSubcategory,
                     where: {
                         ProductCategoryID: 1
                     }
                 },
                 {
                     attributes: ['Quantity'],
-                    model: transactionHistory
+                    model: db.transactionHistory
                 },
                 {
                     attributes: ['ProductPhotoID'],
-                    model: productProductPhoto,
+                    model: db.productProductPhoto,
                     include: [{
                         attributes: ['ThumbnailPhotoFileName'],
-                        model: productPhoto
+                        model: db.productPhoto
                     }]
                 },
                 {
                     attributes: ['ProductDescriptionID'],
-                    model: productDescriptionCulture,
+                    model: db.productDescriptionCulture,
                     where: {
                         CultureID: 'en'
                     },
                     include: [{
                         attributes: ['Description'],
-                        model: productDescription
+                        model: db.productDescription
                     }]
                 }
             ]
         });
     },
-    getTopProducts(model) {
-        return model.findAll({
+    getTopProducts(db) {
+        return db.product.findAll({
             attributes: [
                 [sequelize.fn('sum', sequelize.col('Quantity')), 'TotalAmount'],
                 'ProductID', 'Name'
             ],
             include: [{
                     attributes: [],
-                    model: transactionHistory
+                    model: db.transactionHistory
                 },
                 {
-                    attributes: ['ProductSubcategoryID'],
-                    model: productSubcategory,
+                    attributes: ['Name'],
+                    model: db.productSubcategory,
                     where: {
                         ProductCategoryID: 1
                     }
                 },
                 {
                     attributes: ['ProductPhotoID'],
-                    model: productProductPhoto,
+                    model: db.productProductPhoto,
                     include: [{
                         attributes: ['ThumbnailPhotoFileName'],
-                        model: productPhoto
+                        model: db.productPhoto
                     }]
                 }
             ],
             group: [
                 'Product.ProductID',
                 'Product.Name',
+                'ProductSubcategory.Name',
                 'ProductSubcategory.ProductSubcategoryID',
                 'ProductProductPhoto.ProductPhotoID',
                 'ProductProductPhoto->ProductPhoto.ThumbnailPhotoFileName',
@@ -87,48 +78,36 @@ const productSearch = {
             limit: 5
         });
     },
-    getProductBySubstr(model, substr) {
-        return model.findAll({
+    getProductBySubstr(db, substr) {
+        return db.product.findAll({
             attributes: ['Name', 'ProductNumber', 'Color',
                 'ListPrice', 'ProductProductPhoto.ProductPhotoID',
                 'ProductProductPhoto->ProductPhoto.ThumbnailPhotoFileName',
-                'ProductDescriptionCulture.ProductDescriptionID',
-                'ProductDescriptionCulture->ProductDescription.Description',
-                // [Sequelize.col('ProductDescription.Description'), 'descr']
+                'ProductDescriptionCulture->ProductDescription.Description'
             ],
             include: [{
-                    model: productSubcategory,
+                    model: db.productSubcategory,
                     where: {
                         ProductCategoryID: 1
                     }
                 },
                 {
                     attributes: [],
-                    model: productProductPhoto,
+                    model: db.productProductPhoto,
                     include: [{
                         attributes: [],
-                        model: productPhoto
+                        model: db.productPhoto
                     }]
                 },
                 {
                     attributes: [],
-                    model: productDescriptionCulture,
+                    model: db.productDescriptionCulture,
                     where: {
                         CultureID: 'en'
                     },
                     include: [{
-                        // attributes: [Sequelize.col('Product.Name'), 'name'],
-                        model: productDescription,
-                        // where: {
-                        //     [Op.or]: [{
-                        //         // Description: {
-                        //         //     [Op.like]: `%${substr}%`
-                        //         // },
-                        //         // name: {
-                        //         //     [Op.like]: `%${substr}%`
-                        //         // }
-                        //     }]
-                        // }
+                        attributes: [],
+                        model: db.productDescription,
                     }]
                 }
             ],
@@ -136,10 +115,11 @@ const productSearch = {
                 [Op.or]: [{
                     productName: {
                         [Op.like]: `%${substr}%`
-                    },
-                    // descr: {
-                    //     [Op.like]: `%${substr}%`
-                    // }
+                    }
+                },{
+                    '$productDescriptionCulture->productDescription.Description$': {
+                        [Op.like]: `%${substr}%`
+                    }
                 }]
             },
             raw: true
