@@ -14,9 +14,12 @@ router.get('/top-products', (req, res) => {
 		.then(result => res.json(result))
 });
 
-// router.get('/:id', (req, res) => {
-// 	db.Product.findByPk(req.params.id)
-// 		.then(result => res.json(result))
-// });
+router.get('/search=:productName', (req, res) => {
+	productSearch.getProductBySubstr(product, req.params.productName)
+		.then(result => {
+			console.log(req.params.productName);
+			return res.json(result);
+		})
+});
 
 module.exports = router;

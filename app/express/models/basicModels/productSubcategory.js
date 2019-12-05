@@ -11,7 +11,7 @@ const productSubcategory = sequelize.define('ProductSubcategory', {
         type: dataTypes.INTEGER,
         primaryKey: true
     },
-    productName: {
+    productSubcategoryName: {
         field: 'Name',
         type: dataTypes.STRING
     }
