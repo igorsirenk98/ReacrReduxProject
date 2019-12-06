@@ -1,6 +1,5 @@
-import store from '../js/store/index';
-import { getData, addBicycle } from '../js/actions/index';
+import store from '../js/store';
+import { fetchProducts } from '../js/actions';
 
 window.store = store;
-window.getData = getData;
-window.addBicycle = addBicycle;
+window.getTopProducts = getTopProducts;

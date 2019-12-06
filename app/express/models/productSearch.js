@@ -3,36 +3,22 @@ const sequelize = require('../sequelize');
 const Op = Sequelize.Op;
 
 const productSearch = {
-    getBikes(db) {
+    getAllProducts(db) {
         return db.product.findAll({
-            attributes: ['Name', 'ProductNumber', 'Color', 'ListPrice'],
+            attributes: ['productId', 'name', 'productNumber', 'color', 'listPrice'],
             include: [{
+                    attributes: ['name'],
                     model: db.productSubcategory,
                     where: {
                         ProductCategoryID: 1
                     }
                 },
                 {
-                    attributes: ['Quantity'],
-                    model: db.transactionHistory
-                },
-                {
-                    attributes: ['ProductPhotoID'],
+                    attributes: ['productPhotoId'],
                     model: db.productProductPhoto,
                     include: [{
-                        attributes: ['ThumbnailPhotoFileName'],
+                        attributes: ['thumbnailPhoto'],
                         model: db.productPhoto
-                    }]
-                },
-                {
-                    attributes: ['ProductDescriptionID'],
-                    model: db.productDescriptionCulture,
-                    where: {
-                        CultureID: 'en'
-                    },
-                    include: [{
-                        attributes: ['Description'],
-                        model: db.productDescription
                     }]
                 }
             ]
@@ -41,51 +27,15 @@ const productSearch = {
     getTopProducts(db) {
         return db.product.findAll({
             attributes: [
-                [sequelize.fn('sum', sequelize.col('Quantity')), 'TotalAmount'],
-                'ProductID', 'Name'
+                [sequelize.fn('sum', sequelize.col('quantity')), 'totalAmountSold'],
+                'productId', 'name', 'productNumber', 'color', 'listPrice'
             ],
             include: [{
                     attributes: [],
                     model: db.transactionHistory
                 },
                 {
-                    attributes: ['Name'],
-                    model: db.productSubcategory,
-                    where: {
-                        ProductCategoryID: 1
-                    }
-                },
-                {
-                    attributes: ['ProductPhotoID'],
-                    model: db.productProductPhoto,
-                    include: [{
-                        attributes: ['ThumbnailPhotoFileName'],
-                        model: db.productPhoto
-                    }]
-                }
-            ],
-            group: [
-                'Product.ProductID',
-                'Product.Name',
-                'ProductSubcategory.Name',
-                'ProductSubcategory.ProductSubcategoryID',
-                'ProductProductPhoto.ProductPhotoID',
-                'ProductProductPhoto->ProductPhoto.ThumbnailPhotoFileName',
-                'ProductProductPhoto->ProductPhoto.ProductPhotoID'
-            ],
-            order: sequelize.literal('TotalAmount DESC'),
-            subQuery: false,
-            limit: 5
-        });
-    },
-    getProductBySubstr(db, substr) {
-        return db.product.findAll({
-            attributes: ['Name', 'ProductNumber', 'Color',
-                'ListPrice', 'ProductProductPhoto.ProductPhotoID',
-                'ProductProductPhoto->ProductPhoto.ThumbnailPhotoFileName',
-                'ProductDescriptionCulture->ProductDescription.Description'
-            ],
-            include: [{
+                    attributes: ['name'],
                     model: db.productSubcategory,
                     where: {
                         ProductCategoryID: 1
@@ -95,7 +45,51 @@ const productSearch = {
                     attributes: [],
                     model: db.productProductPhoto,
                     include: [{
-                        attributes: [],
+                        attributes: ['largePhoto'],
+                        model: db.productPhoto
+                    }]
+                }
+            ],
+            group: [
+                'product.productId',
+                'product.name',
+                'product.productNumber',
+                'product.color',
+                'product.listPrice',
+                'productSubcategory.name',
+                'productSubcategory.productSubcategoryId',
+                'productProductPhoto->productPhoto.largePhoto',
+                'productProductPhoto->productPhoto.productPhotoId'
+            ],
+            order: sequelize.literal('totalAmountSold DESC'),
+            subQuery: false,
+            limit: 5,
+            raw: true
+        }).then(result => {
+            result.forEach(item => {
+                item['productProductPhoto.productPhoto.largePhoto'] = item['productProductPhoto.productPhoto.largePhoto'].toString('base64');
+            });
+
+            return result;
+        });
+    },
+    getProductBySubstr(db, substr) {
+        return db.product.findAll({
+            attributes: ['productId', 'name', 'productNumber', 'color',
+                'listPrice'
+            ],
+            include: [{
+                    attributes: ['name'],
+                    model: db.productSubcategory,
+                    where: {
+                        ProductCategoryID: 1
+                    }
+                },
+                {
+                    attributes: [],
+                    model: db.productProductPhoto,
+                    include: [{
+                        attributes: ['largePhoto'],
                         model: db.productPhoto
                     }]
                 },
@@ -116,14 +110,63 @@ const productSearch = {
                     productName: {
                         [Op.like]: `%${substr}%`
                     }
-                },{
-                    '$productDescriptionCulture->productDescription.Description$': {
+                }, {
+                    '$productDescriptionCulture->productDescription.description$': {
                         [Op.like]: `%${substr}%`
                     }
                 }]
             },
             raw: true
+        }).then(result => {
+            result.forEach(item => {
+                item['productProductPhoto.productPhoto.largePhoto'] = item['productProductPhoto.productPhoto.largePhoto'].toString('base64');
+            });
+
+            return result;
         });
+    },
+    getProductById(db, id) {
+        return db.product.findOne({
+                attributes: ['productId', 'name', 'productNumber', 'color',
+                    'weight', 'weightUnitMeasureCode', 'size', 'sizeUnitMeasureCode',
+                    'listPrice','productDescriptionCulture->productDescription.description'
+                ],
+                include: [{
+                        attributes: ['name'],
+                        model: db.productSubcategory,
+                        where: {
+                            ProductCategoryID: 1
+                        }
+                    },
+                    {
+                        attributes: [],
+                        model: db.productProductPhoto,
+                        include: [{
+                            attributes: ['largePhoto'],
+                            model: db.productPhoto
+                        }]
+                    },
+                    {
+                        attributes: ['productDescriptionId'],
+                        model: db.productDescriptionCulture,
+                        where: {
+                            CultureID: 'en'
+                        },
+                        include: [{
+                            attributes: ['description'],
+                            model: db.productDescription,
+                        }]
+                    }
+                ],
+                where: {
+                    id
+                },
+                raw: true
+            })
+            .then(result => {
+                result['productProductPhoto.productPhoto.largePhoto'] = result['productProductPhoto.productPhoto.largePhoto'].toString('base64');
+                return result;
+            });
     }
 }
 

@@ -1,22 +1,35 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { fetchProducts } from '../actions'
 
-const mapStateToProps = state => {
-    return {
-        data: state.data
-    };
-};
+const mapStateToProps = state => ({
+    products: state.products.products,
+    error: state.products.error
+});
 
-const ConnectedList = ({ data }) => (
-    <ul>
-        {data.bicycles.map(item => (
-            <li key={item.id}>
-                {item.title}
-            </li>
-        ))}
-    </ul>
-);
+class List extends Component {
+    componentDidMount() {
+        this.props.dispatch(fetchProducts());
+    }
 
-const List = connect(mapStateToProps)(ConnectedList);
+    render() {
+        const { products, error } = this.props;
 
-export default List;
+        if (error) {
+            return <div>Error! {error.message}</div>;
+        }
+
+        return (
+            <ul>
+                {products.map(item => (
+                    <li key={item.productId}>
+                        {item.name}
+                        <img src={`data:image/jpeg;base64, ${item['productProductPhoto.productPhoto.largePhoto']}`}/>
+                    </li>
+                ))}
+            </ul>
+        ); 
+    }
+}
+
+export default connect(mapStateToProps)(List);
