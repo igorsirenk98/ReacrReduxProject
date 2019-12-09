@@ -1,7 +1,7 @@
 import {
-    FETCH_PRODUCTS_START,
-    FETCH_PRODUCTS_SUCCESS,
-    FETCH_PRODUCTS_FAILURE
+    FETCH_TOP_PRODUCTS_START,
+    FETCH_TOP_PRODUCTS_SUCCESS,
+    FETCH_TOP_PRODUCTS_FAILURE
 } from '../constants/action-types';
 
 const initialState = {
@@ -9,21 +9,21 @@ const initialState = {
     error: null
 };
 
-const rootReducer = (state = initialState, action) => {
+const topProductsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case FETCH_PRODUCTS_START: {
+        case FETCH_TOP_PRODUCTS_START: {
             return {
                 ...state,
                 error: null
             };
         }
-        case FETCH_PRODUCTS_SUCCESS: {
+        case FETCH_TOP_PRODUCTS_SUCCESS: {
             return {
                 ...state,
                 products: action.payload.products
             };
         }
-        case FETCH_PRODUCTS_FAILURE: {
+        case FETCH_TOP_PRODUCTS_FAILURE: {
             return {
                 ...state,
                 error: action.payload.error,
@@ -35,4 +35,4 @@ const rootReducer = (state = initialState, action) => {
     }
 };
 
-export default rootReducer;
+export default topProductsReducer;

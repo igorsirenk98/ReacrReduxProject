@@ -1,6 +1,10 @@
 import { combineReducers } from 'redux';
-import products from './productsReducer';
+import topProducts from './topProductsReducer';
+import productById from './productByIdReducer';
+import productsBySearch from './productsBySearchReducer';
 
 export default combineReducers({
-    products
+    topProducts,
+    productById,
+    productsBySearch
 });
