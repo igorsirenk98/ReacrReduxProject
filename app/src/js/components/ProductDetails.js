@@ -1,21 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { ProductCard } from './basicComponents/ProductCard';
+
 import { fetchProductById } from '../actions/ProductById';
 
-const mapStateToProps = (state, ownProps) => ({
-    productId: ownProps.product.match.params.productId,
+const mapStateToProps = state => ({
     product: state.productById.product,
     error: state.productById.error
 });
 
 class ProductDetails extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
-        const { productId, error } = this.props;
+        const { productId } = this.props.match.params;
+        const { error } = this.props;
 
         this.props.dispatch(fetchProductById(productId));
     }
@@ -28,14 +26,7 @@ class ProductDetails extends Component {
         }
 
         return (
-            <>
-                {product && 
-                    <div>
-                        <h2>{ product.name }</h2>
-                        <img src={`data:image/jpeg;base64, ${product['productProductPhoto.productPhoto.largePhoto']}`}/>
-                    </div>
-                }
-            </>
+            <ProductCard product={product} />
         )
     }
 }

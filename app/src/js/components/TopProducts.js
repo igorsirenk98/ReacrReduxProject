@@ -9,6 +9,10 @@ import Container from '@material-ui/core/Container';
 import { fetchTopProducts } from '../actions/TopProducts';
 import { List } from './basicComponents/List';
 
+const containerStyles = {
+    'maxWidth': '1024px'
+};
+
 const mapStateToProps = state => ({
     products: state.topProducts.products,
     error: state.topProducts.error
@@ -29,7 +33,7 @@ class TopProducts extends Component {
         return (
             <>
                 <CssBaseline />
-                <Container fixed>
+                <Container fixed style={containerStyles}>
                     {products.length && 
                         <List products={products}/>
                     }

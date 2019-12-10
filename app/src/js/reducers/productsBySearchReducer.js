@@ -5,7 +5,7 @@ import {
 } from '../constants/action-types';
 
 const initialState = {
-    products: [],
+    searchedProducts: [],
     error: null
 };
 
@@ -20,14 +20,14 @@ const productsBySearchReducer = (state = initialState, action) => {
         case FETCH_PRODUCTS_BY_SEARCH_SUCCESS: {
             return {
                 ...state,
-                searchProducts: action.payload.products
+                searchedProducts: action.payload.products
             };
         }
         case FETCH_PRODUCTS_BY_SEARCH_FAILURE: {
             return {
                 ...state,
                 error: action.payload.error,
-                searchProducts: []
+                searchedProducts: []
             };
         }
         default:

@@ -3,52 +3,46 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { fetchProductsBySearch } from '../../actions/ProductsBySearch';
+import { searchInputChange } from '../../actions/SearchInput';
+
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import InputBase from '@material-ui/core/InputBase';
+import { fade, makeStyles } from '@material-ui/core/styles';
+import MenuIcon from '@material-ui/icons/Menu';
+import SearchIcon from '@material-ui/icons/Search';
 
 const mapStateToProps = state => ({
-    searchValue: '',
-    products: state.topProducts.products,
-    error: state.topProducts.error
+    searchInputValue: state.searchInputChange.searchInputValue
 });
 
-export class SearchInput extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            searchValue: ''
-        }
-    }
-
-    handleChange(e) {
-        const { value } = e.target.value;
-
-        this.setState({
-            searchValue: e.target.value
-        });
+class SearchInput extends Component {
+    handleChange = e => {
+        const { value } = e.target;
+        this.props.dispatch(searchInputChange(value));
     }
 
     render() {
-        const { searchValue } = this.state;
+        const { searchInputValue } = this.props;
 
         return (
             <>
-                <input 
-                    type="text" 
-                    value={searchValue}
-                    name="keyword" 
-                    placeholder="Enter bike name..."
-                    onChange={this.handleChange.bind(this)}
-                />
                 <Link to={{
-                    pathname: `/products/search=${searchValue}`,
-                    searchValue
+                    pathname: `/products/search=${searchInputValue}`
                 }}>
-                    Search
+                    <IconButton aria-label="search">
+                        <SearchIcon />
+                    </IconButton>
                 </Link>
+                <InputBase
+                    value={searchInputValue}
+                    placeholder="Search…"
+                    inputProps={{ 'aria-label': 'search' }}
+                    onChange={this.handleChange}
+                />
             </> 
         )
     }
 }
-
 
 export default connect(mapStateToProps)(SearchInput);

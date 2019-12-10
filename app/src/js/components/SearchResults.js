@@ -9,26 +9,33 @@ import Container from '@material-ui/core/Container';
 import { List } from './basicComponents/List';
 import { fetchProductsBySearch } from '../actions/ProductsBySearch';
 
-const mapStateToProps = (state, ownProps) => ({
-    searchValue: ownProps.searchValue.match.params.searchValue,
-    products: state.topProducts.products,
+const mapStateToProps = state => ({
+    searchedProducts: state.productsBySearch.searchedProducts,
     error: state.topProducts.error
 });
 
-class SearchResults extends Component {
-    componentDidMount() {
-        const { searchValue, error } = this.props;
-        fetchProductsBySearch(searchValue);
-    }
+const containerStyles = {
+    'maxWidth': '1024px'
+};
 
+class SearchResults extends Component {
     componentDidUpdate(prevProps) {
-        if (this.props.searchValue !== prevProps.searchValue) {
-            fetchProductsBySearch(this.props.searchValue);
+        const { searchInputValue: currentSearchInputValue } = this.props.match.params;
+        const { searchInputValue: prevSearchInputValue } = prevProps.match.params;
+
+        if (currentSearchInputValue !== prevSearchInputValue) {
+            this.props.dispatch(fetchProductsBySearch(currentSearchInputValue));
         }
     }
 
+    componentDidMount() {
+        const { searchInputValue } = this.props.match.params;
+
+        this.props.dispatch(fetchProductsBySearch(searchInputValue));
+    }
+
     render() {
-        const { products, error } = this.props;
+        const { searchedProducts, error } = this.props;
 
         if (error) {
             return <div>Error! {error.message}</div>;
@@ -37,9 +44,9 @@ class SearchResults extends Component {
         return (
             <>
             <CssBaseline />
-                <Container fixed>
-                    {products.length &&
-                        <List products={products}/>
+                <Container fixed style={containerStyles}>
+                    {searchedProducts.length &&
+                        <List products={searchedProducts}/>
                     }
                 </Container>
             </>

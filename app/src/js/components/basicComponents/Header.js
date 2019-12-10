@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -9,28 +11,13 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 
-import { SearchInput } from './SearchInput';
+import SearchInput from './SearchInput';
 import { fetchProductsBySearch } from '../../actions/ProductsBySearch';
 
-const useStyles = makeStyles(theme => ({
-    toolbar: {
-      borderBottom: `1px solid ${theme.palette.divider}`,
-    },
-    toolbarTitle: {
-      flex: 1,
-    },
-    toolbarSecondary: {
-      justifyContent: 'space-between',
-      overflowX: 'auto',
-    },
-    toolbarLink: {
-      padding: theme.spacing(1),
-      flexShrink: 0,
-    },
-    searchField: {
-        color: '#fff'
-    }
-}));
+const navStyles = {
+    display: 'flex',
+    'justifyContent': 'space-between'
+};
 
 export class Header extends Component {
     constructor(props) {
@@ -41,21 +28,16 @@ export class Header extends Component {
         return (
             <>
                 <AppBar position="static">
-                    <Toolbar>
-                        <IconButton
-                            edge="start"
-                            color="inherit"
-                            aria-label="open drawer"
-                        >
-                        <MenuIcon />
-                        </IconButton>
+                    <Toolbar style={navStyles}>
                         <Typography variant="h6" noWrap>
-                            Bike shop
+                            <Link
+                                to={{
+                                    pathname: "/products/top-products"
+                                }}>
+                                Bike shop
+                            </Link>
                         </Typography>
                         <div>
-                        <IconButton aria-label="search">
-                            <SearchIcon />
-                        </IconButton>
                         <SearchInput />
                         </div>
                     </Toolbar>
