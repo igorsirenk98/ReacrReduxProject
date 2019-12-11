@@ -6,6 +6,7 @@ import {
 
 const initialState = {
     products: [],
+    loading: false,
     error: null
 };
 
@@ -14,20 +15,23 @@ const topProductsReducer = (state = initialState, action) => {
         case FETCH_TOP_PRODUCTS_START: {
             return {
                 ...state,
+                loading: true,
                 error: null
             };
         }
         case FETCH_TOP_PRODUCTS_SUCCESS: {
             return {
                 ...state,
-                products: action.payload.products
+                products: action.payload.products,
+                loading: false
             };
         }
         case FETCH_TOP_PRODUCTS_FAILURE: {
             return {
                 ...state,
-                error: action.payload.error,
-                products: []
+                products: [],
+                loading: false,
+                error: action.payload.error
             };
         }
         default:

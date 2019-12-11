@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { ProductCard } from './basicComponents/ProductCard';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
 
+import { ProductCardDetailed } from './basicComponents/ProductCardDetailed';
+import Loading from './basicComponents/Loading';
 import { fetchProductById } from '../actions/ProductById';
 
 const mapStateToProps = state => ({
     product: state.productById.product,
+    loading: state.productById.loading,
     error: state.productById.error
 });
 
@@ -19,14 +24,30 @@ class ProductDetails extends Component {
     }
 
     render() {
-        const { product, error } = this.props;
+        const { product, loading, error } = this.props;
 
         if (error) {
-            return <div>Error! {error.message}</div>;
+            return <div className="error"><p>Error! {error.message}</p></div>;
+        } else if (loading) {
+            return (
+                <>
+                    <CssBaseline />
+                    <Container className="containerStyles" fixed>
+                        <div className="loadingContainer">
+                            <Loading />
+                        </div>
+                    </Container>
+                </>
+            );
         }
 
         return (
-            <ProductCard product={product} />
+            <>
+                <CssBaseline />
+                <Container className="containerStyles" fixed>
+                    <ProductCardDetailed product={product} />
+                </Container>
+            </>            
         )
     }
 }

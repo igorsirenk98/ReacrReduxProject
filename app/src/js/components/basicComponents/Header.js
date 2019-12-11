@@ -7,42 +7,40 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
-import { fade, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
+import Button from '@material-ui/core/Button';
+import Tooltip from '@material-ui/core/Tooltip';
+import DirectionsBikeIcon from '@material-ui/icons/DirectionsBike';
 
 import SearchInput from './SearchInput';
 import { fetchProductsBySearch } from '../../actions/ProductsBySearch';
 
-const navStyles = {
-    display: 'flex',
-    'justifyContent': 'space-between'
-};
-
-export class Header extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
-            <>
-                <AppBar position="static">
-                    <Toolbar style={navStyles}>
-                        <Typography variant="h6" noWrap>
+const Header = (props) => (
+    <>
+        <AppBar position="static">
+            <Toolbar className="header">
+                <Typography variant="h6" noWrap>
+                    <Tooltip title="Go to main page" arrow>
+                        <Button>
                             <Link
                                 to={{
                                     pathname: "/products/top-products"
-                                }}>
-                                Bike shop
-                            </Link>
-                        </Typography>
-                        <div>
-                        <SearchInput />
-                        </div>
-                    </Toolbar>
-                </AppBar>
-            </>
-        )
-    }
-}
+                                }}
+                                className="link">
+                                    Bike shop
+                                    <DirectionsBikeIcon />
+                                </Link>
+                        </Button>
+                    </Tooltip>
+                </Typography>
+                <div>
+                <SearchInput />
+                </div>
+            </Toolbar>
+        </AppBar>
+    </>
+);
+
+export default Header;

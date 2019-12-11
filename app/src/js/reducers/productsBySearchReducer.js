@@ -6,6 +6,7 @@ import {
 
 const initialState = {
     searchedProducts: [],
+    loading: false,
     error: null
 };
 
@@ -14,20 +15,23 @@ const productsBySearchReducer = (state = initialState, action) => {
         case FETCH_PRODUCTS_BY_SEARCH_START: {
             return {
                 ...state,
+                loading: true,
                 error: null
             };
         }
         case FETCH_PRODUCTS_BY_SEARCH_SUCCESS: {
             return {
                 ...state,
-                searchedProducts: action.payload.products
+                searchedProducts: action.payload.products,
+                loading: false
             };
         }
         case FETCH_PRODUCTS_BY_SEARCH_FAILURE: {
             return {
                 ...state,
-                error: action.payload.error,
-                searchedProducts: []
+                searchedProducts: [],
+                loading: false,
+                error: action.payload.error
             };
         }
         default:

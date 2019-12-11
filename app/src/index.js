@@ -7,7 +7,9 @@ import store from './js/store/index';
 import TopProducts from './js/components/TopProducts';
 import ProductDetails from './js/components/ProductDetails';
 import SearchResults from './js/components/SearchResults';
-import { Header } from './js/components/basicComponents/Header'
+import Header from './js/components/basicComponents/Header';
+
+import './assets/scss/styles.scss';
 
 render(
     <Provider store={store}>

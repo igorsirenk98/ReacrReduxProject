@@ -1,6 +1,4 @@
-import {
-    SEARCH_INPUT_CHANGE
-} from '../constants/action-types';
+import { SEARCH_INPUT_CHANGE } from '../constants/action-types';
 
 const initialState = {
     searchInputValue: ''

@@ -1,22 +1,21 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
 import { List } from './basicComponents/List';
+import Loading from './basicComponents/Loading';
 import { fetchProductsBySearch } from '../actions/ProductsBySearch';
 
 const mapStateToProps = state => ({
     searchedProducts: state.productsBySearch.searchedProducts,
-    error: state.topProducts.error
+    loading: state.productsBySearch.loading,
+    error: state.productsBySearch.error
 });
-
-const containerStyles = {
-    'maxWidth': '1024px'
-};
 
 class SearchResults extends Component {
     componentDidUpdate(prevProps) {
@@ -35,20 +34,34 @@ class SearchResults extends Component {
     }
 
     render() {
-        const { searchedProducts, error } = this.props;
+        const { searchedProducts, loading, error } = this.props;
 
         if (error) {
-            return <div>Error! {error.message}</div>;
+            return <div className="error"><p>Error! {error.message}</p></div>;
+        } else if (loading) {
+            return (
+                <>
+                    <CssBaseline />
+                    <Container className="containerStyles" fixed>
+                        <div className="loadingContainer">
+                            <Loading />
+                        </div>
+                    </Container>
+                </>
+            );
         }
 
         return (
             <>
-            <CssBaseline />
-                <Container fixed style={containerStyles}>
-                    {searchedProducts.length &&
-                        <List products={searchedProducts}/>
-                    }
-                </Container>
+                {!!searchedProducts.length ? (
+                    <List products={searchedProducts}/>
+                ) : (
+                    <Typography class="error" gutterBottom variant="h5" component="h2">
+                        There is no results for "{this.props.match.params.searchInputValue}"
+                    </Typography>
+                )
+                    
+                }
             </>
         ); 
     }

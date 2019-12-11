@@ -6,6 +6,7 @@ import {
 
 const initialState = {
     product: null,
+    loading: false,
     error: null
 };
 
@@ -14,20 +15,23 @@ const productByIdReducer = (state = initialState, action) => {
         case FETCH_PRODUCT_BY_ID_START: {
             return {
                 ...state,
+                loading: true,
                 error: null
             }
         }
         case FETCH_PRODUCT_BY_ID_SUCCESS: {
             return {
                 ...state,
-                product: action.payload.product
+                product: action.payload.product,
+                loading: false
             }
         }
         case FETCH_PRODUCT_BY_ID_FAILURE: {
             return {
                 ...state,
-                error: action.payload.error,
-                product: null
+                product: null,
+                loading: false,
+                error: action.payload.error
             };
         }
         default:

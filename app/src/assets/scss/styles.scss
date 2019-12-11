@@ -1,0 +1,50 @@
+.containerStyles {
+    max-width: 1024px;
+}
+
+.list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    &Item {
+        margin: 0 auto;
+        width: auto;
+    }
+}
+
+.card,
+.error {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin: 20px;
+}
+
+.link {
+    display: flex;
+    align-items: center;
+    color: #000;
+    text-decoration: none;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.img {
+    margin: 20px;
+}
+
+.loadingContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
