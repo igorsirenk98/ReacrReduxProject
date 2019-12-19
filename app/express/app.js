@@ -4,7 +4,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const db = require('./models/basicModels');
+const db = require('./models/base');
 
 var app = express();
 

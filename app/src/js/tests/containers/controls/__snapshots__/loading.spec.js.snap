@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loading component Loading initial renders correctly 1`] = `"<Loading type=\\"spinningBubbles\\" color=\\"#000\\" height=\\"50px\\" width=\\"50px\\" delay={0} />"`;
+
+exports[`Loading component Loading start renders correctly 1`] = `"<Loading type=\\"spinningBubbles\\" color=\\"#000\\" height=\\"50px\\" width=\\"50px\\" delay={0} />"`;

@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchInput component SearchInput initial renders correctly 1`] = `
+"<Fragment>
+  <WithStyles(ForwardRef(Tooltip)) title=\\"Click to search\\" arrow={true}>
+    <Link to=\\"/\\">
+      <WithStyles(ForwardRef(IconButton)) className=\\"header__search-icon\\" aria-label=\\"search\\">
+        <SearchIcon />
+      </WithStyles(ForwardRef(IconButton))>
+    </Link>
+  </WithStyles(ForwardRef(Tooltip))>
+  <WithStyles(ForwardRef(InputBase)) className=\\"header__input\\" value=\\"\\" placeholder=\\"Search bikes…\\" inputProps={{...}} onChange={[Function]} onKeyDown={[Function]} />
+</Fragment>"
+`;
+
+exports[`SearchInput component SearchInput with entered value renders correctly 1`] = `
+"<Fragment>
+  <WithStyles(ForwardRef(Tooltip)) title=\\"Click to search\\" arrow={true}>
+    <Link to=\\"/products/search=a\\">
+      <WithStyles(ForwardRef(IconButton)) className=\\"header__search-icon\\" aria-label=\\"search\\">
+        <SearchIcon />
+      </WithStyles(ForwardRef(IconButton))>
+    </Link>
+  </WithStyles(ForwardRef(Tooltip))>
+  <WithStyles(ForwardRef(InputBase)) className=\\"header__input\\" value=\\"a\\" placeholder=\\"Search bikes…\\" inputProps={{...}} onChange={[Function]} onKeyDown={[Function]} />
+</Fragment>"
+`;

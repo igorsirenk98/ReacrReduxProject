@@ -3,8 +3,10 @@
         "es6": true
     },
     "extends": [
+        "eslint:recommended",
         "plugin:react/recommended",
-        "airbnb"
+        "airbnb",
+        "prettier"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -18,8 +20,26 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "prettier"
     ],
     "rules": {
+        "max-len": ["error", {
+            "code": 100
+        }],
+        "allowIndentationTabs": 0,
+        "prefer-promise-reject-errors": ["off"],
+        "react/jsx-filename-extension": ["off"],
+        "no-return-assign": ["off"],
+        "no-tabs": 0,
+        "indent": [0, "tab"],
+        "class-methods-use-this": 0,
+        "react/prop-types": ["off"],
+        "prefer-destructuring": ["off"],
+        "jsx-a11y/label-has-associated-control": 0,
+        "no-underscore-dangle": 0,
+        "react/destructuring-assignment": 0,
+        "react/jsx-indent": 0,
+        "react/jsx-indent-props": 0
     }
 }

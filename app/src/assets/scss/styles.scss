@@ -1,50 +1,83 @@
-.containerStyles {
+.container {
     max-width: 1024px;
 }
 
-.list {
+.center {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 
-    &Item {
+.products {
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    &__item {
         margin: 0 auto;
         width: auto;
     }
 }
 
+.appbar {
+    margin-bottom: 20px;
+}
+
 .card,
-.error {
+.notification {
     display: flex;
     justify-content: center;
+    align-items: center;
     text-align: center;
     margin: 20px;
+}
+
+.card {
+    text-align: left;
 }
 
 .link {
     display: flex;
     align-items: center;
-    color: #000;
+    color: #fff;
     text-decoration: none;
+
+    &-blue {
+        padding: 10px;
+        border-radius: 5px;
+        background-color: #3f51b5;
+    }
 }
 
-.header {
+.toolbar {
     display: flex;
     justify-content: space-between;
 }
 
 .img {
+    height: 100%;
     margin: 20px;
 }
 
-.loadingContainer {
+.loading-container {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 75vh;
 }
 
-.loading {
-    position: absolute;
-    top: 50%;
-    left: 50%;
+.header {
+    &__search-icon .MuiIconButton-label,
+    &__input input {
+        color: #fff;
+    }
+}
+
+.gif {
+    width: 500px;
+    height: 400px;
+    margin-top: 50px;
 }

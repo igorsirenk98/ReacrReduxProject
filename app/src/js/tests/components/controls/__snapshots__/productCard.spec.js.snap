@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductCard component renders correctly 1`] = `
+"<Fragment>
+  <Link className=\\"products__item link\\" to={{...}}>
+    <WithStyles(ForwardRef(Tooltip)) title=\\"Click to view details\\" TransitionComponent={{...}} arrow={true}>
+      <WithStyles(ForwardRef(Card)) className=\\"card\\">
+        <WithStyles(ForwardRef(CardActionArea)) className=\\"products__item\\">
+          <img className=\\"img\\" src=\\"data:image/jpeg;base64, undefined\\" alt=\\"bike\\" />
+          <WithStyles(ForwardRef(CardContent))>
+            <WithStyles(ForwardRef(Typography)) gutterBottom={true} variant=\\"h5\\" component=\\"h2\\">
+              bike
+            </WithStyles(ForwardRef(Typography))>
+            <WithStyles(ForwardRef(Typography)) variant=\\"body2\\" color=\\"textSecondary\\" component=\\"p\\">
+              Type: 
+            </WithStyles(ForwardRef(Typography))>
+            <WithStyles(ForwardRef(Typography)) variant=\\"body2\\" color=\\"textSecondary\\" component=\\"p\\">
+              Price: 
+              100
+              $
+            </WithStyles(ForwardRef(Typography))>
+          </WithStyles(ForwardRef(CardContent))>
+        </WithStyles(ForwardRef(CardActionArea))>
+      </WithStyles(ForwardRef(Card))>
+    </WithStyles(ForwardRef(Tooltip))>
+  </Link>
+</Fragment>"
+`;

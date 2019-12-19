@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`List component renders correctly 1`] = `
+"<Fragment>
+  <CssBaseline />
+  <WithStyles(ForwardRef(Container)) className=\\"container\\" fixed={true}>
+    <ul className=\\"products__list\\">
+      <ProductCard product={{...}} />
+      <ProductCard product={{...}} />
+    </ul>
+  </WithStyles(ForwardRef(Container))>
+</Fragment>"
+`;

@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductDetailsCard component renders correctly 1`] = `
+"<Fragment>
+  <WithStyles(ForwardRef(Card)) className=\\"card\\">
+    <img className=\\"img\\" src=\\"data:image/jpeg;base64, undefined\\" alt=\\"bike\\" />
+    <WithStyles(ForwardRef(CardContent))>
+      <WithStyles(ForwardRef(Typography)) gutterBottom={true} variant=\\"h5\\" component=\\"h2\\">
+        bike
+      </WithStyles(ForwardRef(Typography))>
+      <WithStyles(ForwardRef(Typography))>
+        Product Code:
+      </WithStyles(ForwardRef(Typography))>
+      <WithStyles(ForwardRef(Typography)) variant=\\"body2\\" color=\\"textSecondary\\" component=\\"p\\">
+        2
+      </WithStyles(ForwardRef(Typography))>
+      <WithStyles(ForwardRef(Typography))>
+        Type:
+      </WithStyles(ForwardRef(Typography))>
+      <WithStyles(ForwardRef(Typography)) variant=\\"body2\\" color=\\"textSecondary\\" component=\\"p\\" />
+      <WithStyles(ForwardRef(Typography))>
+        Price:
+      </WithStyles(ForwardRef(Typography))>
+      <WithStyles(ForwardRef(Typography)) variant=\\"body2\\" color=\\"textSecondary\\" component=\\"p\\">
+        100
+        $
+      </WithStyles(ForwardRef(Typography))>
+      <WithStyles(ForwardRef(Typography))>
+        Characteristics:
+      </WithStyles(ForwardRef(Typography))>
+      <WithStyles(ForwardRef(Typography)) variant=\\"body2\\" color=\\"textSecondary\\" component=\\"p\\">
+        Color: 
+        red
+      </WithStyles(ForwardRef(Typography))>
+      <WithStyles(ForwardRef(Typography)) variant=\\"body2\\" color=\\"textSecondary\\" component=\\"p\\">
+        Weight: 
+        75
+        kg
+      </WithStyles(ForwardRef(Typography))>
+      <WithStyles(ForwardRef(Typography)) variant=\\"body2\\" color=\\"textSecondary\\" component=\\"p\\">
+        Size: 
+        24
+        cm
+      </WithStyles(ForwardRef(Typography))>
+      <WithStyles(ForwardRef(Typography))>
+        Description:
+      </WithStyles(ForwardRef(Typography))>
+      <WithStyles(ForwardRef(Typography)) variant=\\"body2\\" color=\\"textSecondary\\" component=\\"p\\">
+        Something...
+      </WithStyles(ForwardRef(Typography))>
+    </WithStyles(ForwardRef(CardContent))>
+  </WithStyles(ForwardRef(Card))>
+</Fragment>"
+`;

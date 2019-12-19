@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header component renders correctly 1`] = `
+"<Fragment>
+  <WithStyles(ForwardRef(AppBar)) className=\\"appbar\\" position=\\"static\\">
+    <WithStyles(ForwardRef(Toolbar)) className=\\"toolbar\\">
+      <WithStyles(ForwardRef(Typography)) variant=\\"h6\\" noWrap={true}>
+        <WithStyles(ForwardRef(Tooltip)) title=\\"Go to main page\\" arrow={true}>
+          <WithStyles(ForwardRef(Button))>
+            <Link to={{...}} className=\\"link\\">
+              Bike shop
+              <DirectionsBikeIcon />
+            </Link>
+          </WithStyles(ForwardRef(Button))>
+        </WithStyles(ForwardRef(Tooltip))>
+      </WithStyles(ForwardRef(Typography))>
+      <div>
+        <Connect(SearchInput) />
+      </div>
+    </WithStyles(ForwardRef(Toolbar))>
+  </WithStyles(ForwardRef(AppBar))>
+</Fragment>"
+`;

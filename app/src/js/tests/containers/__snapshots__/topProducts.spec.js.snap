@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TopProducts container TopProducts error renders correctly 1`] = `"<ErrorMessage error={{...}} />"`;
+
+exports[`TopProducts container TopProducts initial renders correctly 1`] = `
+"<Fragment>
+  <WithStyles(ForwardRef(Typography)) className=\\"notification\\" gutterBottom={true} variant=\\"h3\\" component=\\"h2\\">
+    Top products
+  </WithStyles(ForwardRef(Typography))>
+  <List products={{...}} />
+</Fragment>"
+`;
+
+exports[`TopProducts container TopProducts isLoading renders correctly 1`] = `
+"<Fragment>
+  <CssBaseline />
+  <WithStyles(ForwardRef(Container)) className=\\"container\\" fixed={true}>
+    <div className=\\"loading-container\\">
+      <Connect(Loading) />
+    </div>
+  </WithStyles(ForwardRef(Container))>
+</Fragment>"
+`;
+
+exports[`TopProducts container TopProducts with data renders correctly 1`] = `
+"<Fragment>
+  <WithStyles(ForwardRef(Typography)) className=\\"notification\\" gutterBottom={true} variant=\\"h3\\" component=\\"h2\\">
+    Top products
+  </WithStyles(ForwardRef(Typography))>
+  <List products={{...}} />
+</Fragment>"
+`;

@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageNotFound component renders correctly 1`] = `
+"<Fragment>
+  <CssBaseline />
+  <WithStyles(ForwardRef(Container)) className=\\"container center\\" fixed={true}>
+    <WithStyles(ForwardRef(Typography)) variant=\\"h3\\" noWrap={true}>
+      Oops, page not found
+    </WithStyles(ForwardRef(Typography))>
+    <iframe src=\\"https://giphy.com/embed/R8ygnAs1Qsdr2\\" frameBorder=\\"0\\" className=\\"gif\\" allowFullScreen={true} />
+    <WithStyles(ForwardRef(Button))>
+      <Link to={{...}} className=\\"link link-blue\\">
+        Back to main page
+      </Link>
+    </WithStyles(ForwardRef(Button))>
+  </WithStyles(ForwardRef(Container))>
+</Fragment>"
+`;

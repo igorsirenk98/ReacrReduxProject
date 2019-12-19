@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchResults container SearchResults error renders correctly 1`] = `"<ErrorMessage error={{...}} />"`;
+
+exports[`SearchResults container SearchResults initial renders correctly 1`] = `
+"<Fragment>
+  <WithStyles(ForwardRef(Typography)) className=\\"notification\\" gutterBottom={true} variant=\\"h3\\" component=\\"h2\\">
+    Results for &quot;
+    undefined
+    &quot;
+  </WithStyles(ForwardRef(Typography))>
+  <List products={{...}} />
+</Fragment>"
+`;
+
+exports[`SearchResults container SearchResults isLoading renders correctly 1`] = `
+"<Fragment>
+  <CssBaseline />
+  <WithStyles(ForwardRef(Container)) className=\\"container\\" fixed={true}>
+    <div className=\\"loading-container\\">
+      <Connect(Loading) />
+    </div>
+  </WithStyles(ForwardRef(Container))>
+</Fragment>"
+`;
+
+exports[`SearchResults container SearchResults with data renders correctly 1`] = `
+"<Fragment>
+  <WithStyles(ForwardRef(Typography)) className=\\"notification\\" gutterBottom={true} variant=\\"h3\\" component=\\"h2\\">
+    Results for &quot;
+    undefined
+    &quot;
+  </WithStyles(ForwardRef(Typography))>
+  <List products={{...}} />
+</Fragment>"
+`;

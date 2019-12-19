@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ErrorMessage component renders correctly 1`] = `
+"<Fragment>
+  <CssBaseline />
+  <WithStyles(ForwardRef(Container)) className=\\"container\\" fixed={true}>
+    <WithStyles(ForwardRef(Typography)) className=\\"notification\\" gutterBottom={true} variant=\\"h5\\" component=\\"h2\\">
+      Error! 
+      error
+    </WithStyles(ForwardRef(Typography))>
+  </WithStyles(ForwardRef(Container))>
+</Fragment>"
+`;
