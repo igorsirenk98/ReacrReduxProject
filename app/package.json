@@ -12,7 +12,7 @@
     "history": "^4.10.1",
     "jest": "^24.9.0",
     "node-fetch": "^2.6.0",
-    "node-sass": "^4.13.0",
+    "node-sass": "^7.0.0",
     "nodemon": "^2.0.1",
     "pretty-quick": "^2.0.1",
     "react": "^16.12.0",
